@@ -1,0 +1,35 @@
+html, body {
+  background-color: #36393f;
+  color: #dedede;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.__json-pretty__ {
+  background-color: #36393f !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 27rem;
+  margin: 0 auto;
+}
+
+.highlight {
+  background-color: #202225;
+  padding: 5px;
+  border-radius: 10px;
+}

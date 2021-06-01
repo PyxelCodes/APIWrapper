@@ -1,0 +1,23 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build ./dist",
+    "start": "next start --port 443 --hostname 0.0.0.0"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@types/material-ui": "^0.21.8",
+    "axios": "^0.21.1",
+    "next": "10.2.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-json-pretty": "^2.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.2"
+  }
+}

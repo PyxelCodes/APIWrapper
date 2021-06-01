@@ -1,0 +1,14 @@
+#go-button {
+    margin-top: 1rem;
+    background-color: #292b2f;
+    color: #dedede;
+    height: 40px;
+    width: 120px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#go-button:active {
+    transform: translateY(4px);
+}
