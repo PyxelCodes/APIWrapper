@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+#header {
+    height: 90px;
+    background-color: #0c0c0c;
+}
+
+#header-container {
+    padding: 20px;
+    padding-left: 50px;
+    display: flex;
+}
+
+#header-container p {
+    margin: 20px;
+    margin-top: 15px;
+    font-family: 'Barlow', Helvetica, Arial, Lucida, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+#header-container p:hover {
+    color: #b8b8b8;
+}
+
+.header-right {
+    display: flex;
+    width: 100%;
+}
+
+.__header_img {
+    object-fit: cover;
+    height: 42px;
+    width: 42px;
+}
+
+#footer {
+    background-color: #0c0c0c;
+    height: 300px;
+    padding: 50px;
+    text-align: center;
+}
+
+#footer-links a {
+    padding: 20px;
+}
+
+#footer-logo {
+    margin: 40px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+#footer-logo img {
+    object-fit: cover;
+    height: 80px;
+}
+
+#footer-socials svg {
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    color: #0c0c0c;
+    background-color: #b8b8b8;
+    border-radius: 50px;
+}
+
+#footer-socials svg:hover {
+    background-color: #f3f3f3;
+}
+
+#idinput {
+    background-color: #424b59;
+    width: 100%;
+    border: none;
+    color: #f3f3f3;
+}
+
+#content {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
+
+#submit {
+    border-radius: 4px;
+    border: none;
+    background-color: #424b59;
+    color: #f3f3f3;
+    margin: 5px;
+    margin-left: 79%;
+}
+
+#auth-input {
+    margin: 60px;
+}
+
+.token-val {
+    position: absolute;
+}

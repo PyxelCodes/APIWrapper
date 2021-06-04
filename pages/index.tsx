@@ -1,119 +1,100 @@
-import { useEffect, useState } from 'react';
-import { getEndpoint } from '../get'
-import JSONPretty from 'react-json-pretty';
+import React from 'react'
+import { Header } from '../components/Header'
+import { DefineCorrespondingElement } from '../components/Main'
+import { Footer } from '../components/Footer'
+import { Formik } from 'formik'
+import axios from 'axios';
 
-var didApplyListeners = false;
+export default function New() {
 
-export default function Wrapper() {
+    if (process.browser) {
+        let [internalContent, setInternalContent] = React.useState('user')
+        let [isChecking, setChecking] = React.useState(false)
+        let [checkDidFail, fail] = React.useState(false)
+        let [checkDidSucceed, done] = React.useState(false)
 
+        const auth = window.localStorage.getItem('auth')
 
+        if (!auth && !checkDidSucceed) {
+            return (
+                <>
+                    <Header
+                        setInternalContent={setInternalContent}
+                    />
 
-  let [data, setData] = useState(<> </>)
-  let [didReq, setDidReq] = useState<boolean>(false)
-  let [loading, setLoading] = useState<boolean>(true)
+                    <div id="content">
+                        <div id="auth-input">
+                            <h2> Authentication </h2>
+                            <p> We couldnt find your Authentication token anywhere, it seems to be lost </p>
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 500)
-  })
+                            <Formik
+                                initialValues={{}}
+                                onSubmit={(values: any, actions) => {
+                                    let auth = values.auth;
+                                    setChecking(true);
+                                    axios.get('https://api.reefraid.com/v1/clans/debug', { headers: { Authorization: auth } })
+                                        .then(() => {
+                                            window.localStorage.setItem('auth', auth);
+                                            done(true);
+                                            fail(false);
+                                            setChecking(false)
+                                        })
+                                        .catch(() => {
+                                            fail(true);
+                                            setChecking(false)
+                                            actions.resetForm();
+                                        })
+                                }}
+                            >
 
+                                {
+                                    props => (
+                                        <form onSubmit={props.handleSubmit}>
+                                            <input
+                                                className={`form-control ${checkDidFail ? 'is-invalid' : ''}`}
+                                                id="idinput"
+                                                placeholder="Authentication Token"
+                                                onChange={props.handleChange}
+                                                type="text"
+                                                name="auth"
+                                                autoComplete="off"
+                                            />
 
+                                            {
+                                                isChecking ? <p className="token-val"> validating token </p> : null
+                                            }
 
+                                            <input
+                                                type="submit"
+                                                id="submit"
+                                                value="Select"
+                                            />
+                                        </form>
+                                    )
+                                }
 
+                            </Formik>
+                        </div>
+                    </div>
 
-  function ReqToDOM(type, data?) {
-    if (type === 'noslash') return setData(
-      <p> the endpoint needs to be prefixed with a slash! </p>
-    )
-
-    if (data) setData(
-      <>
-        <span className="res-status" style={{ color: data.status.toString().startsWith(2) ? '#BFFF00' : data.status.toString().startsWith(3) ? '#FFA500' : 'FF0000' }} > {data.status} </span>
-        <span className="res-statusText" > {data.statusText} </span>
-
-        <div className="res-body">
-          <JSONPretty
-            data={data.data}
-            id="res-body-json"
-          />
-        </div>
-
-      </>
-    )
-  }
-
-  if (loading) return <p> loading </p>
-
-  if (!loading) {
-    setTimeout(() => {
-      let input: HTMLInputElement = document.getElementById('endpoint') as any;
-      let auth: HTMLInputElement = document.getElementById('auth') as any
-      let button = document.getElementById('go-button');
-      if (!didApplyListeners) {
-        console.log('applying listeners')
-        didApplyListeners = true;
-        button.addEventListener('click', () => {
-          getEndpoint(input.value, auth.value, ReqToDOM, didReq, setDidReq)
-        })
-      }
-    }, 200)
-  }
-
-  if (!loading) {
-
-
-
-    return (
-      <div id="apiwrapper">
-
-
-
-        <div id="main">
-          <div className="center mainwrapper">
-            <h2> API Wrapper </h2>
-            <p> Enter an endpoint or select one from the list </p>
-
-            <p className="tip"> The Input is already prefixed with "https://api.reefraid.com/v1" </p>
-
-            <p> Example: <span className="highlight"> /users/477095216327950347 </span> </p>
-
-            <input
-              id="auth"
-              placeholder="Authentication Token"
-              autoComplete="off"
-              autoCapitalize="off"
-              autoCorrect="off"
-            />
-
-            <input
-              id="endpoint"
-              placeholder="Endpoint"
-              autoComplete="off"
-              autoCapitalize="off"
-              autoCorrect="off"
-
-            />
+                    <Footer alignToBottom={true} />
+                </>
+            )
+        }
 
 
-            <button id="go-button" onClick={() => { document.getElementById('go-button').classList.add('active') }}>
-              <span className="text">Run Query</span>
-            </button>
-          </div>
+        return (
+            <>
+                <Header
+                    setInternalContent={setInternalContent}
+                />
+
+                <DefineCorrespondingElement ic={internalContent} />
 
 
-          <div id="output">
-            {
-              data
-            }
-          </div>
-
-
-        </div>
-      </div>
-    )
-
-  }
-
+                <Footer alignToBottom={false} />
+            </>
+        )
+    } else return null;
 
 }

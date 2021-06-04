@@ -1,18 +1,11 @@
 import axios from 'axios';
 
-export const getEndpoint = (val, auth, cb, dR, sDR) => {
+export const getEndpoint = (val, auth, cb, type) => {
     // there are only GET endpoints available to the normal user
-
-    if (dR) return;
-
-    sDR(true)
-    setTimeout(() => { sDR(false) }, 200)
-
-    if (!val.startsWith('/')) return cb('noslash')
 
     console.log('making request')
 
-    axios.get(`https://api.reefraid.com/v1${val}`, {
+    axios.get(`https://api.reefraid.com/v1/${type}/${val}`, {
         headers: {
             Authorization: auth,
         }
