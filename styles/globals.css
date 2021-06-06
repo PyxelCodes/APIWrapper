@@ -1,5 +1,5 @@
 html, body {
-  background-color: #36393f;
+  background-color: #242424;
   color: #dedede;
   padding: 0;
   margin: 0;
@@ -33,4 +33,18 @@ a {
 button:focus,
 input:focus {
   outline: none;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: inherit;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #18191c;
+  border-radius: 4px;
 }

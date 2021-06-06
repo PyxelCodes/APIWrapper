@@ -5,6 +5,9 @@ import 'react-json-pretty/themes/monikai.css';
 import '../styles/new.css'
 import Head from 'next/head'
 import '../styles/menu.css'
+import '../styles/doc.css'
+import "prismjs/themes/prism-tomorrow.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 
 function APIWrapper({ Component, pageProps }) {
