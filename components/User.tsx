@@ -1,7 +1,8 @@
 import { Formik } from 'formik'
 import React from 'react'
 import { getEndpoint } from '../get'
-
+import { Collapse } from 'react-collapse'
+import { DropdownItem } from "./dropdown";
 
 export function User() {
 
@@ -36,10 +37,8 @@ export function User() {
 
                 onSubmit={
                     (values: any, actions) => {
-                        console.log(values)
                         getEndpoint(values.userid, auth, (status, res) => {
-                            console.log(status, stat, res.data)
-                            if(status === 'fail') {
+                            if (status === 'fail') {
                                 setStat(true)
                             } else {
                                 setUser(res.data)
@@ -83,20 +82,52 @@ export function User() {
                     Object.keys(user).map(x => {
                         let u = user[x];
 
-                        console.log(u, x)
+                        let color = typeof u === 'string' ? '#d37b4c' : '#7765c2';
 
-                        if(u === null) u = 'null'
-                        if(u === undefined) u = 'undefined'
+                        if (u === null) u = 'null'
+                        if (u === undefined) u = 'undefined'
 
-                        if (x === '_id' || x === '__v') return null;
+                        if (x === '_id' || x === '__v' || x === 'invites') return null;
 
                         if (typeof u === 'object') {
-                            return //Object.keys(u ?? {}).map(c => { return <span className="user-property"> {x}: {u}<br /> <br /> </span> }) 
+                            return <DropdownItem extended={true} theme="dark" id="user-object" title={x}>
+                                <div className="object-map">
+                                    {
+                                        Object.keys(u).length >= 1
+                                            ?
+                                            Object.keys(u).map(k => {
+                                                let color = typeof u === 'number' ? '#7765c2' : '#d37b4c' ;
+                                                return <span className="user-object-prop">
+                                                    <p className="property inner">
+                                                        {
+                                                            JSON.stringify(k).replace('"', '').replace('"', '')
+                                                        }
+                                                     </p>
+                                                    <p className="value" style={{ color }}>
+                                                        {
+                                                            JSON.stringify(u[k])
+                                                        }
+                                                    </p>
+                                                </span>
+                                            })
+                                            : <span></span>
+                                    }
+                                </div>
+                            </DropdownItem>
                         }
                         //if(u === null || u === undefined) u = 'null'
                         return (
                             <span className="user-property">
-                                { x}: { String(u) }
+                                <p className="property">
+                                    {
+                                        String(x)
+                                    }
+                                </p>
+                                <p className="value" style={{ color }}>
+                                    {
+                                        String(u)
+                                    }
+                                </p>
                                 <br />
                                 <br />
                             </span>

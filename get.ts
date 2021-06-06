@@ -15,7 +15,7 @@ export const getEndpoint = (val, auth, cb, type) => {
         })
         .catch(d => {
             console.dir(d)
-            if(d.response) return cb('fail', { data: d.response.data, status: d.response.status, statusText: d.response.statusText })
+            if (d.response) return cb('fail', { data: d.response.data, status: d.response.status, statusText: d.response.statusText })
 
             return cb('fail', { data: { _error: 'internal error, could not make request', code: 0 }, status: '500', statusText: 'Internal Server Error' })
         })

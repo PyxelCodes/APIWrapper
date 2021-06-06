@@ -4,6 +4,7 @@ import '../styles/button.css'
 import 'react-json-pretty/themes/monikai.css';
 import '../styles/new.css'
 import Head from 'next/head'
+import '../styles/menu.css'
 
 
 function APIWrapper({ Component, pageProps }) {

@@ -83,7 +83,6 @@
 #content {
     display: grid;
     justify-content: center;
-    text-align: center;
 }
 
 #submit {
@@ -101,4 +100,28 @@
 
 .token-val {
     position: absolute;
+}
+
+
+.user-property { width: 30em; max-width: 100%; }
+.user-property p { display: inline-block; max-width: 50%; }
+.user-property p:nth-child(1) { float:left; }
+.user-property p:nth-child(2) { float:right; }
+
+.user-object-prop {
+    display: flex;
+    justify-content: space-between;
+}
+
+#user {
+    width: 40rem;
+}
+
+.inner {
+    margin-left: 1rem;
+}
+
+.user_id {
+    text-align: center;
+    color: #7765c2;
 }

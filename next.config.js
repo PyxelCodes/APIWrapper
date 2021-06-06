@@ -2,7 +2,7 @@
 module.exports = {
     distDir: 'build',
     darkMode: "class",
-    furure: {
+    future: {
       webpack5: true,
     },
     purge: {
