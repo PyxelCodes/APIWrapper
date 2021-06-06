@@ -1,8 +1,27 @@
 import fs from 'fs';
 import path from 'path'
+import Cors from 'cors'
 
+const cors = Cors({
+    methods: ['GET'],
+    origin: '*'
+})
 
-export default function (req, res) {
+function runMiddleware(req, res, fn) {
+    return new Promise((resolve, reject) => {
+        fn(req, res, (result) => {
+            if (result instanceof Error) {
+                return reject(result)
+            }
+
+            return resolve(result)
+        })
+    })
+}
+
+export default async function (req, res) {
+
+    await runMiddleware(req, res, cors)
 
     let final = [];
 
@@ -13,8 +32,8 @@ export default function (req, res) {
 
         let item = rds[i];
 
-        if(item.endsWith('.md')) {
-            
+        if (item.endsWith('.md')) {
+
             final.push({ type: 'file', data: item.replace('.md', '') });
 
             continue;
