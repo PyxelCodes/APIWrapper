@@ -10,7 +10,7 @@ export function Header({ setInternalContent }) {
     const [activeMenu, setActiveMenu] = useState('main');
     const [menuHeight, setMenuHeight] = useState(null);
 
-    function calcHeight(el: any){
+    function calcHeight(el: any) {
         let height = el.offsetHeight;
         setMenuHeight(height + 40)
     }
@@ -18,7 +18,7 @@ export function Header({ setInternalContent }) {
 
     function DropdownItem(props) {
         return (
-            <a href="#" className="menu-item" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+            <a href="#" className="menu-item" onClick={(x) => { props.goToMenu && setActiveMenu(props.goToMenu); if (props.onClick) props.onClick(x) }}>
                 {
                     props.children
                 }
@@ -72,6 +72,7 @@ export function Header({ setInternalContent }) {
                                         <div className="menu">
                                             <DropdownItem goToMenu="api"> API </DropdownItem>
                                             <DropdownItem goToMenu="auth"> Auth </DropdownItem>
+                                            <DropdownItem onClick={() => { location.href = 'https://apiwrapper.vercel.app/docs/intro' }}> Documentation </DropdownItem>
                                             <DropdownItem> Version: 0.1.2 </DropdownItem>
                                         </div>
                                     </CSSTransition>
@@ -87,7 +88,7 @@ export function Header({ setInternalContent }) {
                                             <DropdownItem> host: api.reefraid.com </DropdownItem>
                                             <DropdownItem> API Version: v1 </DropdownItem>
                                             <DropdownItem> engine: axios, XMLHTTPRequest </DropdownItem>
-                                            <DropdownItem> user: { browserName } { browserVersion} </DropdownItem>
+                                            <DropdownItem> user: {browserName} {browserVersion} </DropdownItem>
                                             <DropdownItem goToMenu="main"> Back </DropdownItem>
                                         </div>
                                     </CSSTransition>
