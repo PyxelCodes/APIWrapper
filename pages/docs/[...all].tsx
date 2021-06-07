@@ -121,10 +121,7 @@ export default function Docs(props) {
         setCurrentDoc(f.data || f.files[x])
 
 
-        axios.get(`https://apiwrapper.vercel.app/markdown/${t}.md`).then(({ data }) => {
-            setMd(data)
-            setInnerLoading(false);
-        })
+            setMd(props.md[t+'.md'])
 
     }
 
