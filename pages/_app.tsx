@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import '../styles/Wrapper.css'
 import '../styles/button.css'
 import 'react-json-pretty/themes/monikai.css';
 import '../styles/new.css'

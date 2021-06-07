@@ -7,9 +7,10 @@ import axios from 'axios'
 import Prism from 'prismjs'
 import Head from 'next/head'
 import Loader from "react-loader-spinner";
+import fs from 'fs';
+import path from 'path'
 
-export default function Docs() {
-
+export default function Docs(props) {
     const router = useRouter()
     let [files, setFiles] = React.useState([])
     let [loading, setLoading] = React.useState(true)
@@ -26,41 +27,34 @@ export default function Docs() {
 
     React.useEffect(() => {
         if (router.asPath !== router.route) {
+            setFiles(props.files)
 
-            axios.get(`https://apiwrapper.vercel.app/api/files`).then(({ data }) => {
-                setFiles(data)
+            let localFiles = props.files;
 
-                let localFiles = data
+            let path = localFiles.find(x => x?.data?.includes((router.query.all as any).join('/')) ?? x?.files?.includes((router.query.all as any)[1]))
 
-                let path = localFiles.find(x => x?.data?.includes((router.query.all as any).join('/')) ?? x?.files?.includes((router.query.all as any)[1]))
+            if (!path) {
+                for (let x1 in localFiles) {
+                    let x2 = localFiles[x1]
 
-                if (!path) {
-                    for (let x1 in localFiles) {
-                        let x2 = localFiles[x1]
+                    if (x2.type === 'dir') {
+                        for (let x3 in x2.files) {
+                            let x4 = x2.files[x3]
 
-                        if (x2.type === 'dir') {
-                            for (let x3 in x2.files) {
-                                let x4 = x2.files[x3]
-
-                                if (x4.includes((router.query.all as any)[1])) path = `${x2.dirname}/${x4}`
-                            }
+                            if (x4.includes((router.query.all as any)[1])) path = `${x2.dirname}/${x4}`
                         }
                     }
                 }
+            }
 
-                if (typeof path === 'object') path = path.data
+            if (typeof path === 'object') path = path.data
 
-                //path = path?.data ?? (router.query.all as any).join('/')
+            //path = path?.data ?? (router.query.all as any).join('/')
+            setMd(props.md[path + '.md']);
 
-                axios.get(`https://apiwrapper.vercel.app/markdown/${path}.md`).then(({ data }) => {
-                    setMd(data)
+            setCurrentDoc(path)
 
-                })
-
-                setCurrentDoc(path)
-
-                setLoading(false);
-            })
+            setLoading(false);
         }
     }, [router])
 
@@ -118,8 +112,6 @@ export default function Docs() {
             if (final.dirname) final.dirname = final.dirname.slice(3);
         }
 
-        console.log(k, `${k}`.match(/^[0-9]/g))
-
         if (final?.filename?.match(/^[0-9]/g)) {
             final.filename = final.filename.slice(3)
         }
@@ -140,8 +132,6 @@ export default function Docs() {
 
 
     let render = Parser(md)
-
-    console.log(render)
 
     return (
         <>
@@ -201,14 +191,14 @@ export default function Docs() {
 
                         {
                             innerLoading ?
-                            <div id="loader">
-                                <Loader
-                                    type="Triangle"
-                                    color="#febc57"
-                                    height={100}
-                                    width={100}
-                                />
-                                <p> Loading { currentDoc } </p>
+                                <div id="loader">
+                                    <Loader
+                                        type="Triangle"
+                                        color="#febc57"
+                                        height={100}
+                                        width={100}
+                                    />
+                                    <p> Loading {currentDoc} </p>
                                 </div>
                                 :
                                 <div id="doc-content" dangerouslySetInnerHTML={{ __html: render }} />
@@ -222,4 +212,52 @@ export default function Docs() {
             }
         </>
     )
+}
+
+
+export async function getServerSideProps(context) {
+    let returns: any = { props: {} }
+
+    let final = [];
+
+    let rds = fs.readdirSync(path.join(__dirname, '../../../../public/markdown'))
+
+
+    for (let i = 0; i < rds.length; i++) {
+
+        let item = rds[i];
+
+        if (item.endsWith('.md')) {
+
+            final.push({ type: 'file', data: item.replace('.md', '') });
+
+            continue;
+        }
+
+        // assume its a dir
+
+        let format = { type: 'dir', dirname: item, files: [] }
+
+        fs.readdirSync(path.join(__dirname, '../../../../public/markdown', item)).forEach(file => {
+            format.files.push(file.replace('.md', ''))
+        })
+
+        final.push(format)
+    }
+
+    returns.props.files = final;
+
+    let MDFiles = {};
+
+    let rds2 = fs.readdirSync(path.join(__dirname, '..', '..', '..', '..', 'public/markdown'));
+
+    rds2.forEach(x => {
+        let d = fs.readFileSync(path.join(__dirname, '..', '..', '..', '..', 'public/markdown', x));
+        MDFiles[x] = d.toString();
+    })
+
+    returns.props.md = MDFiles
+
+
+    return returns;
 }
