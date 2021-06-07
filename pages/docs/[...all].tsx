@@ -116,12 +116,13 @@ export default function Docs(props) {
             final.filename = final.filename.slice(3)
         }
 
-        window.history.replaceState({}, '', `https://apiwrapper.vercel.app/docs/${fstring || final.dirname + '/' + final.filename}`)
+       window.history.replaceState({}, '', `https://apiwrapper.vercel.app/docs/${fstring || final.dirname + '/' + final.filename}`)
 
         setCurrentDoc(f.data || f.files[x])
 
 
             setMd(props.md[t+'.md'])
+            setInnerLoading(false);
 
     }
 
