@@ -2,7 +2,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { browserName, browserVersion } from 'react-device-detect'
-import { updateQueryStringParameter } from '../../utils/updateQS'
+import pkg from '../../package.json';
 
 export function Header({ setInternalContent }) {
 
@@ -74,7 +74,7 @@ export function Header({ setInternalContent }) {
                                             <DropdownItem goToMenu="api"> API </DropdownItem>
                                             <DropdownItem goToMenu="auth"> Auth </DropdownItem>
                                             <DropdownItem onClick={() => { location.href = 'https://apiwrapper.vercel.app/docs/intro' }}> Documentation </DropdownItem>
-                                            <DropdownItem> Version: 0.1.2 </DropdownItem>
+                                            <DropdownItem> Version: { pkg.version } </DropdownItem>
                                         </div>
                                     </CSSTransition>
 

@@ -7,7 +7,7 @@ import '../styles/menu.css'
 import '../styles/doc.css'
 import "prismjs/themes/prism-tomorrow.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
+import pkg from '../package.json'
 
 function APIWrapper({ Component, pageProps }) {
   return (
@@ -15,7 +15,7 @@ function APIWrapper({ Component, pageProps }) {
 
       <Head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous" />
-        <title> ReefRaid API Wrapper v0.1.2 </title>
+        <title> ReefRaid API Wrapper { pkg.version } </title>
       </Head>
 
       <Component {...pageProps} />
