@@ -2,6 +2,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { browserName, browserVersion } from 'react-device-detect'
+import { updateQueryStringParameter } from '../utils/updateQS'
 
 export function Header({ setInternalContent }) {
 

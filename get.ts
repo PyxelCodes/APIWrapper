@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { updateQueryStringParameter } from './utils/updateQS'
 
 export const getEndpoint = (val, auth, cb, type) => {
     // there are only GET endpoints available to the normal user
@@ -11,6 +12,7 @@ export const getEndpoint = (val, auth, cb, type) => {
         }
     })
         .then(d => {
+            updateQueryStringParameter(window.location.href, 'prefetch', d.data._id)
             return cb('success', { data: d.data, status: d.status, statusText: d.statusText })
         })
         .catch(d => {

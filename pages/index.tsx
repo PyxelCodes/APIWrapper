@@ -4,16 +4,24 @@ import { DefineCorrespondingElement } from '../components/Main'
 import { Footer } from '../components/Footer'
 import { Formik } from 'formik'
 import axios from 'axios';
+import { useRouter } from 'next/router'
+import { updateQueryStringParameter } from '../utils/updateQS'
 
 export default function New() {
 
     if (process.browser) {
-        let [internalContent, setInternalContent] = React.useState('user')
+        let [internalContent, setInternalContentState] = React.useState('user')
         let [isChecking, setChecking] = React.useState(false)
         let [checkDidFail, fail] = React.useState(false)
         let [checkDidSucceed, done] = React.useState(false)
 
         const auth = window.localStorage.getItem('auth')
+
+
+        let setInternalContent = (d) => {
+            updateQueryStringParameter(window.location.href, 's', d);
+            setInternalContentState(d);
+        }
 
         if (!auth && !checkDidSucceed) {
             return (
@@ -82,6 +90,10 @@ export default function New() {
             )
         }
 
+        let router = useRouter();
+
+        let q = router.query
+
 
         return (
             <>
@@ -89,7 +101,7 @@ export default function New() {
                     setInternalContent={setInternalContent}
                 />
 
-                <DefineCorrespondingElement ic={internalContent} />
+                <DefineCorrespondingElement ic={internalContent} query={q?.s} prefetch={router.query?.prefetch}/>
 
 
                 <Footer alignToBottom={false} />

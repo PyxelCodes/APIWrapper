@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Barlow');
+:root {
+    --int: rgb(119, 101, 194);
+    --string: rgb(211, 123, 76);
+}
+
 #header {
     height: 90px;
     background-color: #0c0c0c;
@@ -102,11 +107,23 @@
     position: absolute;
 }
 
+.user-property {
+    width: 30em;
+    max-width: 100%;
+}
 
-.user-property { width: 30em; max-width: 100%; }
-.user-property p { display: inline-block; max-width: 50%; }
-.user-property p:nth-child(1) { float:left; }
-.user-property p:nth-child(2) { float:right; }
+.user-property p {
+    display: inline-block;
+    max-width: 50%;
+}
+
+.user-property p:nth-child(1) {
+    float: left;
+}
+
+.user-property p:nth-child(2) {
+    float: right;
+}
 
 .user-object-prop {
     display: flex;
@@ -124,4 +141,47 @@
 .user_id {
     text-align: center;
     color: #7765c2;
+}
+
+.clan_memberlist {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 2px solid #dedede;
+    margin-bottom: 10px;
+}
+
+.clan_memberlist_member_xp:nth-child(1) {
+    float: left;
+}
+
+.clan_memberlist_member_id {
+    color: var(--string);
+}
+
+.clan_memberlist_member_xp:nth-child(2) {
+    float: right;
+    color: var(--int)
+}
+
+.clan_memberlist_member_xp:nth-child(3) {
+    float: right;
+    color: var(--int)
+}
+
+.clan_memberlist_h p:nth-child(1) {
+    float: left;
+}
+
+.clan_memberlist_h p:nth-child(2) {
+    float: right;
+}
+
+.member-role-tag {
+    color: #fff;
+    background-color: #424b59;
+    margin-left: 10px;
+    border-radius: 10px;
+    padding: 2px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    white-space: pre;
 }
