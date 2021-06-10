@@ -56,7 +56,7 @@ export function Item({ prefetch }) {
                     :
 
                     <>
-                        <h2> User </h2>
+                        <h2> Item </h2>
 
                         <p> Paste in the ID of the item you want to fetch</p>
 

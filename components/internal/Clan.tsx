@@ -72,7 +72,7 @@ export function Clan({ prefetch }) {
 
                     <>
 
-                        <h2> Item </h2>
+                        <h2> Clan </h2>
 
                         <p> Paste in the clan id of the clan you want to fetch</p>
 
