@@ -3,6 +3,7 @@ import React from 'react'
 import { getEndpoint } from '../get'
 import { DropdownItem } from "./dropdown";
 import { ClanMemberMap } from './ClanMemberMap'
+import Loader from 'react-loader-spinner'
 
 export function Clan({ prefetch }) {
 
@@ -55,115 +56,133 @@ export function Clan({ prefetch }) {
     return (
         <div id="content">
 
-            <h2> Clan </h2>
+            {
+                isPreFetching
+                    ?
+                    <>
+                        <Loader
+                            type="Triangle"
+                            color="#7765c2"
+                            width="100"
+                            height="100"
+                        />
+                        <h2> Prefetching item {prefetch} </h2>
+                    </>
+                    :
 
-            <p> Paste in the clan id of the clan you want to fetch</p>
+                    <>
 
-            <Formik
-                initialValues={{}}
+                        <h2> Item </h2>
 
-                onSubmit={
-                    (values: any, actions) => {
-                        getEndpoint(values.userid, auth, (status, res) => {
-                            if (status === 'fail') {
-                                setStat(true)
-                            } else {
-                                setClan(res.data)
-                                setStat(false)
+                        <p> Paste in the clan id of the clan you want to fetch</p>
+
+                        <Formik
+                            initialValues={{}}
+
+                            onSubmit={
+                                (values: any, actions) => {
+                                    getEndpoint(values.userid, auth, (status, res) => {
+                                        if (status === 'fail') {
+                                            setStat(true)
+                                        } else {
+                                            setClan(res.data)
+                                            setStat(false)
+                                        }
+                                    }, 'clans')
+                                }
                             }
-                        }, 'clans')
-                    }
-                }
-            >
-                {
-                    props => (
-                        <form onSubmit={props.handleSubmit}>
-                            <input
-                                type="text"
-                                onChange={props.handleChange}
-                                name="userid"
-                                placeholder="Clan ID"
-                                className={`form-control ${stat ? 'is-invalid' : ''}`}
-                                autoComplete="off"
-                                id="idinput"
-                            />
+                        >
+                            {
+                                props => (
+                                    <form onSubmit={props.handleSubmit}>
+                                        <input
+                                            type="text"
+                                            onChange={props.handleChange}
+                                            name="userid"
+                                            placeholder="Clan ID"
+                                            className={`form-control ${stat ? 'is-invalid' : ''}`}
+                                            autoComplete="off"
+                                            id="idinput"
+                                        />
 
-                            <input
-                                type="submit"
-                                value="Lookup"
-                                id="submit"
-                            />
-                        </form>
-                    )
-                }
-            </Formik>
-            <br />
-            <br />
-            <div id="user">
-                <h2 className="user_id">
-                    {
-                        clan._id
-                    }
-                </h2>
-                {
-                    Object.keys(clan).map(x => {
+                                        <input
+                                            type="submit"
+                                            value="Lookup"
+                                            id="submit"
+                                        />
+                                    </form>
+                                )
+                            }
+                        </Formik>
+                        <br />
+                        <br />
+                        <div id="user">
+                            <h2 className="user_id">
+                                {
+                                    clan._id
+                                }
+                            </h2>
+                            {
+                                Object.keys(clan).map(x => {
 
-                        if (x === 'members') return <ClanMemberMap ml={x} clan={clan} />
-                        let u = clan[x];
+                                    if (x === 'members') return <ClanMemberMap ml={x} clan={clan} />
+                                    let u = clan[x];
 
-                        let color = typeof u === 'string' ? '#d37b4c' : '#7765c2';
+                                    let color = typeof u === 'string' ? '#d37b4c' : '#7765c2';
 
-                        if (u === null) u = 'null'
-                        if (u === undefined) u = 'undefined'
+                                    if (u === null) u = 'null'
+                                    if (u === undefined) u = 'undefined'
 
-                        if (x === '_id' || x === '__v' || x === 'invites') return null;
+                                    if (x === '_id' || x === '__v' || x === 'invites') return null;
 
-                        if (typeof u === 'object') {
-                            return <DropdownItem extended={true} theme="dark" id="user-object" title={x}>
-                                <div className="object-map">
-                                    {
-                                        Object.keys(u).length >= 1
-                                            ?
-                                            Object.keys(u).map(k => {
-                                                let color = typeof u === 'number' ? '#7765c2' : '#d37b4c';
-                                                return <span className="user-object-prop">
-                                                    <p className="property inner">
-                                                        {
-                                                            JSON.stringify(k).replace('"', '').replace('"', '')
-                                                        }
-                                                    </p>
-                                                    <p className="value" style={{ color }}>
-                                                        {
-                                                            JSON.stringify(u[k])
-                                                        }
-                                                    </p>
-                                                </span>
-                                            })
-                                            : <span></span>
+                                    if (typeof u === 'object') {
+                                        return <DropdownItem extended={true} theme="dark" id="user-object" title={x}>
+                                            <div className="object-map">
+                                                {
+                                                    Object.keys(u).length >= 1
+                                                        ?
+                                                        Object.keys(u).map(k => {
+                                                            let color = typeof u === 'number' ? '#7765c2' : '#d37b4c';
+                                                            return <span className="user-object-prop">
+                                                                <p className="property inner">
+                                                                    {
+                                                                        JSON.stringify(k).replace('"', '').replace('"', '')
+                                                                    }
+                                                                </p>
+                                                                <p className="value" style={{ color }}>
+                                                                    {
+                                                                        JSON.stringify(u[k])
+                                                                    }
+                                                                </p>
+                                                            </span>
+                                                        })
+                                                        : <span></span>
+                                                }
+                                            </div>
+                                        </DropdownItem>
                                     }
-                                </div>
-                            </DropdownItem>
-                        }
-                        //if(u === null || u === undefined) u = 'null'
-                        return (
-                            <span className="user-property">
-                                <p className="property">
-                                    {
-                                        String(x)
-                                    }
-                                </p>
-                                <p className="value" style={{ color }}>
-                                    {
-                                        String(u)
-                                    }
-                                </p>
-                                <br />
-                                <br />
-                            </span>
-                        )
-                    })
-                }
-            </div>
+                                    //if(u === null || u === undefined) u = 'null'
+                                    return (
+                                        <span className="user-property">
+                                            <p className="property">
+                                                {
+                                                    String(x)
+                                                }
+                                            </p>
+                                            <p className="value" style={{ color }}>
+                                                {
+                                                    String(u)
+                                                }
+                                            </p>
+                                            <br />
+                                            <br />
+                                        </span>
+                                    )
+                                })
+                            }
+                        </div>
+                    </>
+            }
         </div>
     )
 }
