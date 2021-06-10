@@ -1,7 +1,7 @@
 import React from 'react'
-import { Header } from '../components/Header'
-import { DefineCorrespondingElement } from '../components/Main'
-import { Footer } from '../components/Footer'
+import { Header } from '../components/page/Header'
+import { DefineCorrespondingElement } from '../components/internal/Main'
+import { Footer } from '../components/page/Footer'
 import { Formik } from 'formik'
 import axios from 'axios';
 import { useRouter } from 'next/router'
@@ -20,6 +20,10 @@ export default function New() {
 
         let setInternalContent = (d) => {
             updateQueryStringParameter(window.location.href, 's', d);
+            let url = new URL(window.location.href)
+            let x = new URLSearchParams(url.search)
+            x.delete('prefetch')
+            window.history.replaceState(null, null, `${url.origin}${url.pathname}?${x.toString()}`);
             setInternalContentState(d);
         }
 

@@ -1,32 +1,30 @@
 import { Formik } from 'formik'
 import React from 'react'
-import { getEndpoint } from '../get'
-import { DropdownItem } from "./dropdown";
-import { ClanMemberMap } from './ClanMemberMap'
-import Loader from 'react-loader-spinner'
+import { getEndpoint } from '../../get'
+import { DropdownItem } from "../dropdown";
+import Loader from 'react-loader-spinner';
 
-export function Clan({ prefetch }) {
-
+export function User({ prefetch }) {
 
     let auth = window.localStorage.getItem('auth')
-
-    let [clan, setClan] = React.useState({
-        _id: 'debug',
-        xp: 305,
-        ownerID: "477095216327950347",
-        "members": [
-            {
-                "xp": 305,
-                "role": null,
-                "_id": "477095216327950347"
-            }
-        ],
-        created: '2021-06-04T10:43:04.489Z'
-    })
 
     let [isPreFetching, setIsPreFetching] = React.useState(false)
 
     let [didPrefetch, setDidPrefetch] = React.useState(false)
+
+    let [user, setUser] = React.useState({
+        _id: '477095216327950347',
+        gold: 69420,
+        vault: 69,
+        vaultLvl: 100,
+        defense: 1090,
+        attack: 1090,
+        joined: 1420070400000,
+        farmLvl: 8,
+        coinBoost: 1,
+        commandsExecuted: 6969,
+
+    })
 
 
     React.useEffect(() => {
@@ -41,12 +39,12 @@ export function Clan({ prefetch }) {
 
             } else {
                 setDidPrefetch(true)
-                setClan(res.data)
+                setUser(res.data)
                 setStat(false)
                 setIsPreFetching(false)
 
             }
-        }, 'clans')
+        }, 'users')
     })
 
 
@@ -66,15 +64,14 @@ export function Clan({ prefetch }) {
                             width="100"
                             height="100"
                         />
-                        <h2> Prefetching item {prefetch} </h2>
+                        <h2> Prefetching user {prefetch} </h2>
                     </>
                     :
 
                     <>
+                        <h2> User </h2>
 
-                        <h2> Item </h2>
-
-                        <p> Paste in the clan id of the clan you want to fetch</p>
+                        <p> Paste in the ID of the user you want to fetch</p>
 
                         <Formik
                             initialValues={{}}
@@ -85,10 +82,10 @@ export function Clan({ prefetch }) {
                                         if (status === 'fail') {
                                             setStat(true)
                                         } else {
-                                            setClan(res.data)
+                                            setUser(res.data)
                                             setStat(false)
                                         }
-                                    }, 'clans')
+                                    }, 'users')
                                 }
                             }
                         >
@@ -99,7 +96,7 @@ export function Clan({ prefetch }) {
                                             type="text"
                                             onChange={props.handleChange}
                                             name="userid"
-                                            placeholder="Clan ID"
+                                            placeholder="User ID"
                                             className={`form-control ${stat ? 'is-invalid' : ''}`}
                                             autoComplete="off"
                                             id="idinput"
@@ -119,14 +116,12 @@ export function Clan({ prefetch }) {
                         <div id="user">
                             <h2 className="user_id">
                                 {
-                                    clan._id
+                                    user._id
                                 }
                             </h2>
                             {
-                                Object.keys(clan).map(x => {
-
-                                    if (x === 'members') return <ClanMemberMap ml={x} clan={clan} />
-                                    let u = clan[x];
+                                Object.keys(user).map(x => {
+                                    let u = user[x];
 
                                     let color = typeof u === 'string' ? '#d37b4c' : '#7765c2';
 

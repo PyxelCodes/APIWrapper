@@ -1,18 +1,33 @@
-import React from 'react'
-import { getEndpoint } from '../get'
-import Loader from 'react-loader-spinner'
 import { Formik } from 'formik'
-import { DropdownItem } from './dropdown'
+import React from 'react'
+import { getEndpoint } from '../../get'
+import { DropdownItem } from "../dropdown";
+import { ClanMemberMap } from '../ClanMemberMap'
+import Loader from 'react-loader-spinner'
 
-export function Item({ prefetch }) {
+export function Clan({ prefetch }) {
+
+
+    let auth = window.localStorage.getItem('auth')
+
+    let [clan, setClan] = React.useState({
+        _id: 'debug',
+        xp: 305,
+        ownerID: "477095216327950347",
+        "members": [
+            {
+                "xp": 305,
+                "role": null,
+                "_id": "477095216327950347"
+            }
+        ],
+        created: '2021-06-04T10:43:04.489Z'
+    })
 
     let [isPreFetching, setIsPreFetching] = React.useState(false)
 
     let [didPrefetch, setDidPrefetch] = React.useState(false)
 
-    let [item, setItem] = React.useState<any>({})
-
-    const auth = window.localStorage.getItem('auth')
 
     React.useEffect(() => {
         if (!prefetch || didPrefetch) return;
@@ -26,16 +41,16 @@ export function Item({ prefetch }) {
 
             } else {
                 setDidPrefetch(true)
-                setItem(res.data)
+                setClan(res.data)
                 setStat(false)
                 setIsPreFetching(false)
 
             }
-        }, 'items')
+        }, 'clans')
     })
 
-    let [stat, setStat] = React.useState(false)
 
+    let [stat, setStat] = React.useState(false)
 
 
     return (
@@ -56,9 +71,10 @@ export function Item({ prefetch }) {
                     :
 
                     <>
-                        <h2> User </h2>
 
-                        <p> Paste in the ID of the item you want to fetch</p>
+                        <h2> Item </h2>
+
+                        <p> Paste in the clan id of the clan you want to fetch</p>
 
                         <Formik
                             initialValues={{}}
@@ -69,10 +85,10 @@ export function Item({ prefetch }) {
                                         if (status === 'fail') {
                                             setStat(true)
                                         } else {
-                                            setItem(res.data)
+                                            setClan(res.data)
                                             setStat(false)
                                         }
-                                    }, 'items')
+                                    }, 'clans')
                                 }
                             }
                         >
@@ -83,7 +99,7 @@ export function Item({ prefetch }) {
                                             type="text"
                                             onChange={props.handleChange}
                                             name="userid"
-                                            placeholder="User ID"
+                                            placeholder="Clan ID"
                                             className={`form-control ${stat ? 'is-invalid' : ''}`}
                                             autoComplete="off"
                                             id="idinput"
@@ -103,12 +119,14 @@ export function Item({ prefetch }) {
                         <div id="user">
                             <h2 className="user_id">
                                 {
-                                    item.itemId
+                                    clan._id
                                 }
                             </h2>
                             {
-                                Object.keys(item).map(x => {
-                                    let u = item[x];
+                                Object.keys(clan).map(x => {
+
+                                    if (x === 'members') return <ClanMemberMap ml={x} clan={clan} />
+                                    let u = clan[x];
 
                                     let color = typeof u === 'string' ? '#d37b4c' : '#7765c2';
 
@@ -116,16 +134,6 @@ export function Item({ prefetch }) {
                                     if (u === undefined) u = 'undefined'
 
                                     if (x === '_id' || x === '__v' || x === 'invites') return null;
-
-                                    if(x === 'description') return (
-                                        <span className="item-desc">
-                                            {
-                                                String(u)
-                                            }
-                                            <br />
-                                            <br />
-                                        </span>
-                                    )
 
                                     if (typeof u === 'object') {
                                         return <DropdownItem extended={true} theme="dark" id="user-object" title={x}>
@@ -148,7 +156,7 @@ export function Item({ prefetch }) {
                                                                 </p>
                                                             </span>
                                                         })
-                                                        : <> </>
+                                                        : <span></span>
                                                 }
                                             </div>
                                         </DropdownItem>

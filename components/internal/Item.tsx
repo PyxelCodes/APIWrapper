@@ -1,31 +1,18 @@
-import { Formik } from 'formik'
 import React from 'react'
-import { getEndpoint } from '../get'
-import { DropdownItem } from "./dropdown";
-import Loader from 'react-loader-spinner';
+import { getEndpoint } from '../../get'
+import Loader from 'react-loader-spinner'
+import { Formik } from 'formik'
+import { DropdownItem } from '../dropdown'
 
-export function User({ prefetch }) {
-
-    let auth = window.localStorage.getItem('auth')
+export function Item({ prefetch }) {
 
     let [isPreFetching, setIsPreFetching] = React.useState(false)
 
     let [didPrefetch, setDidPrefetch] = React.useState(false)
 
-    let [user, setUser] = React.useState({
-        _id: '477095216327950347',
-        gold: 69420,
-        vault: 69,
-        vaultLvl: 100,
-        defense: 1090,
-        attack: 1090,
-        joined: 1420070400000,
-        farmLvl: 8,
-        coinBoost: 1,
-        commandsExecuted: 6969,
+    let [item, setItem] = React.useState<any>({})
 
-    })
-
+    const auth = window.localStorage.getItem('auth')
 
     React.useEffect(() => {
         if (!prefetch || didPrefetch) return;
@@ -39,16 +26,16 @@ export function User({ prefetch }) {
 
             } else {
                 setDidPrefetch(true)
-                setUser(res.data)
+                setItem(res.data)
                 setStat(false)
                 setIsPreFetching(false)
 
             }
-        }, 'users')
+        }, 'items')
     })
 
-
     let [stat, setStat] = React.useState(false)
+
 
 
     return (
@@ -64,14 +51,14 @@ export function User({ prefetch }) {
                             width="100"
                             height="100"
                         />
-                        <h2> Prefetching user {prefetch} </h2>
+                        <h2> Prefetching item {prefetch} </h2>
                     </>
                     :
 
                     <>
                         <h2> User </h2>
 
-                        <p> Paste in the ID of the user you want to fetch</p>
+                        <p> Paste in the ID of the item you want to fetch</p>
 
                         <Formik
                             initialValues={{}}
@@ -82,10 +69,10 @@ export function User({ prefetch }) {
                                         if (status === 'fail') {
                                             setStat(true)
                                         } else {
-                                            setUser(res.data)
+                                            setItem(res.data)
                                             setStat(false)
                                         }
-                                    }, 'users')
+                                    }, 'items')
                                 }
                             }
                         >
@@ -116,12 +103,12 @@ export function User({ prefetch }) {
                         <div id="user">
                             <h2 className="user_id">
                                 {
-                                    user._id
+                                    item.itemId
                                 }
                             </h2>
                             {
-                                Object.keys(user).map(x => {
-                                    let u = user[x];
+                                Object.keys(item).map(x => {
+                                    let u = item[x];
 
                                     let color = typeof u === 'string' ? '#d37b4c' : '#7765c2';
 
@@ -129,6 +116,16 @@ export function User({ prefetch }) {
                                     if (u === undefined) u = 'undefined'
 
                                     if (x === '_id' || x === '__v' || x === 'invites') return null;
+
+                                    if(x === 'description') return (
+                                        <span className="item-desc">
+                                            {
+                                                String(u)
+                                            }
+                                            <br />
+                                            <br />
+                                        </span>
+                                    )
 
                                     if (typeof u === 'object') {
                                         return <DropdownItem extended={true} theme="dark" id="user-object" title={x}>
@@ -151,7 +148,7 @@ export function User({ prefetch }) {
                                                                 </p>
                                                             </span>
                                                         })
-                                                        : <span></span>
+                                                        : <> </>
                                                 }
                                             </div>
                                         </DropdownItem>
