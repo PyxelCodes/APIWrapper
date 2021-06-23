@@ -61,7 +61,7 @@ export function Clan({ prefetch }) {
                     ?
                     <>
                         <Loader
-                            type="Triangle"
+                            type="Triangle" // uwu
                             color="#7765c2"
                             width="100"
                             height="100"
