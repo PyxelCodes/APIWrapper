@@ -1,3 +1,5 @@
 {
-  "name": "APIWrapper"
+  "name": "@reefraid/apiwrapper",
+  "license": "MIT",
+  "author": "PyxelCodes <pyxel@reefraid.com>"
 }
