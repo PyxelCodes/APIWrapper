@@ -18,9 +18,6 @@ export default function New() {
 
     if (process.browser) {
         let [internalContent, setInternalContentState] = React.useState('user')
-        let [isChecking, setChecking] = React.useState(false)
-        let [checkDidFail, fail] = React.useState(false)
-        let [checkDidSucceed, done] = React.useState(false)
         let [loading, setLoading] = React.useState(true);
         let [auth, setAuth] = React.useState<any>(null)
 
