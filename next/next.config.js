@@ -29,7 +29,7 @@ module.exports = {
       return [
         {
           source: '/api/v1/:path*',
-          destination: process.env.NODE_ENV === 'development' ? 'http://localhost/v1/:path*' : 'https'
+          destination: process.env.NODE_ENV === 'development' ? 'http://localhost/v1/:path*' : 'https://stats.reefraid.com/api/v1/:path*'
         }
       ]
     }
