@@ -1,0 +1,50 @@
+html, body {
+  background-color: #242424;
+  color: #dedede;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 27rem;
+  margin: 0 auto;
+}
+
+.highlight {
+  background-color: #202225;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+button:focus,
+input:focus {
+  outline: none;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: inherit;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #18191c;
+  border-radius: 4px;
+}
