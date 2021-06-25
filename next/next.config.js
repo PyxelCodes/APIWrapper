@@ -2,9 +2,7 @@
 module.exports = {
   distDir: 'build',
   darkMode: "class",
-  future: {
-    webpack5: true,
-  },
+  webpack5: true,
   purge: {
     content: ["./src/**/*.tsx", "./public/index.html"],
     options: {

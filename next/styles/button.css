@@ -12,3 +12,22 @@
 #go-button:active {
     transform: translateY(4px);
 }
+
+.login_discord {
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+    padding: 15px;
+}
+
+.login_discord_click {
+    background-color: #5865F2;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+.login_header {
+    display: flex;
+    justify-content: center;
+    margin-top: 12%;
+}

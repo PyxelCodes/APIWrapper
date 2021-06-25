@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { browserName, browserVersion } from 'react-device-detect'
 import pkg from '../../package.json';
+import axios from 'axios';
+import Cookies from 'js-cookie'
 
 export function Header({ setInternalContent }) {
 
@@ -44,13 +46,13 @@ export function Header({ setInternalContent }) {
                 <span className="header-right">
                     <p onClick={() => setInternalContent('user')}>
                         User
-                </p>
+                    </p>
                     <p onClick={() => setInternalContent('clan')}>
                         Clans
-                </p>
+                    </p>
                     <p onClick={() => setInternalContent('item')}>
                         Items
-                </p>
+                    </p>
                 </span>
 
                 <span id="menu">
@@ -72,9 +74,8 @@ export function Header({ setInternalContent }) {
                                     >
                                         <div className="menu">
                                             <DropdownItem goToMenu="api"> API </DropdownItem>
-                                            <DropdownItem goToMenu="auth"> Auth </DropdownItem>
                                             <DropdownItem onClick={() => { location.href = 'https://apiwrapper.vercel.app/docs/intro' }}> Documentation </DropdownItem>
-                                            <DropdownItem> Version: { pkg.version } </DropdownItem>
+                                            <DropdownItem> Version: {pkg.version} </DropdownItem>
                                         </div>
                                     </CSSTransition>
 
@@ -90,20 +91,6 @@ export function Header({ setInternalContent }) {
                                             <DropdownItem> API Version: v1 </DropdownItem>
                                             <DropdownItem> engine: axios, XMLHTTPRequest </DropdownItem>
                                             <DropdownItem> user: {browserName} {browserVersion} </DropdownItem>
-                                            <DropdownItem goToMenu="main"> Back </DropdownItem>
-                                        </div>
-                                    </CSSTransition>
-
-                                    <CSSTransition
-                                        in={activeMenu === 'auth'}
-                                        unmountOnExit
-                                        timeout={500}
-                                        classNames={'menu-secondary'}
-                                        onEnter={calcHeight}
-                                    >
-                                        <div className="menu">
-                                            <DropdownItem> storage: window.localStorage </DropdownItem>
-                                            <DropdownItem> Change Token (soon):tm: </DropdownItem>
                                             <DropdownItem goToMenu="main"> Back </DropdownItem>
                                         </div>
                                     </CSSTransition>

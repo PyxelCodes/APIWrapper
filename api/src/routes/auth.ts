@@ -24,6 +24,12 @@ router.get('/', async (req: Request | any, res: Response) => {
     }
 })
 
+router.get('/logout', (req, res) => {
+    if(!req.user) return res.sendStatus(401)
+    req.logOut();
+    res.sendStatus(200);
+})
+
 
 
 export default router;

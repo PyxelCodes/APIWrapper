@@ -8,6 +8,8 @@ import config from './config';
 import routes from './routes/index';
 import mongoose from 'mongoose';
 
+process.env.NODE_ENV = 'development';
+
 let app = express()
 let Store = connectMongo(session)
 

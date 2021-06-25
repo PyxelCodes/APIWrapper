@@ -21,6 +21,8 @@ export default function New() {
         let [loading, setLoading] = React.useState(true);
         let [auth, setAuth] = React.useState<any>(null)
 
+        let [shouldAuth, setShouldAuth] = React.useState<boolean>(false);
+
         React.useEffect(() => {
             axios.get(process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/v1/auth' : 'https://stats.reefraid.com/api/v1/auth', { withCredentials: true })
                 .then(({ data }) => {
@@ -29,7 +31,8 @@ export default function New() {
                     setLoading(false);
                 })
                 .catch(() => {
-                    window.location.href = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/v1/auth/discord' : 'https://stats.reefraid.com/api/v1/auth/discord'
+                    setShouldAuth(true);
+                    setLoading(false);
                 })
         }, [])
 
@@ -56,7 +59,7 @@ export default function New() {
                 />
 
                 <div
-                id="loader"
+                    id="loader"
                 >
 
                     <Loader
@@ -70,6 +73,30 @@ export default function New() {
                 <Footer alignToBottom={true} />
             </>
         )
+
+        if (shouldAuth) return (
+            <div>
+                <Header setInternalContent={() => { }} />
+
+                <h3 className="login_header"> Unauthorized </h3>
+
+                <div className="login_discord">
+
+                    <a
+                        href={
+                            process.env.NODE_ENV === 'development'
+                                ? 'http://localhost:3000/api/v1/auth/discord'
+                                : 'https://stats.reefraid.com/api/v1/auth/discord'}
+                        className="login_discord_click"
+                    >
+                        Login via Discord
+                    </a>
+                </div>
+
+
+                <Footer alignToBottom={true} />
+            </div>
+        );
 
         return !loading && (
             <>
