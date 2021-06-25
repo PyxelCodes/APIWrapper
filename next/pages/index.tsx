@@ -2,7 +2,6 @@ import React from 'react'
 import { Header } from '../components/page/Header'
 import { DefineCorrespondingElement } from '../components/internal/Main'
 import { Footer } from '../components/page/Footer'
-import { Formik } from 'formik'
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import { updateQueryStringParameter } from '../utils/updateQS'

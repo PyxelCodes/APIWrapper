@@ -1,5 +1,8 @@
 {
   "name": "@reefraid/apiwrapper",
   "license": "MIT",
-  "author": "PyxelCodes <pyxel@reefraid.com>"
+  "author": "PyxelCodes <pyxel@reefraid.com>",
+  "dependencies": {
+    "@types/showdown": "^1.9.3"
+  }
 }

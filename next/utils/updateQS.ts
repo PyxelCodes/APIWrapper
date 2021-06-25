@@ -4,8 +4,8 @@ function updateQueryStringParameter(url, key, value) {
     p.set(key, value)
     window.history.replaceState(null, null, `${x.origin}${x.pathname}?${p.toString()}`);
 
-  }
+}
 
-  export {
-      updateQueryStringParameter
-  }
+export {
+    updateQueryStringParameter
+}
