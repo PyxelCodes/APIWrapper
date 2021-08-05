@@ -21,6 +21,7 @@
     "passport-discord": "^0.1.4"
   },
   "scripts": {
-    "start": "tsc && node ."
+    "start": "tsc && node .",
+    "dev": "set NODE_ENV=development && yarn start"
   }
 }

@@ -1,0 +1,150 @@
+::selection {
+  background-color: #febb57;
+  color: #1c2028;
+}
+
+
+#header {
+  height: 60px;
+  width: 100%;
+  background-color: #20242b;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+#sidebar {
+  display: flex;
+  justify-content: left;
+  position: absolute;
+  width: 150px;
+  margin-top: 61px;
+  height: calc(100% - 61px);
+  background-color: #282d37;
+  border-right: 1px solid #2f3541;
+}
+
+.sidebar-top {
+  display: flex;
+  border-bottom: 1px solid #212223;
+  position: absolute;
+  margin-left: 40px;
+  height: 50px;
+  width: 60px;
+}
+
+
+.sidebar-top h3 {
+  margin: 0 auto;
+  margin-top: 18px;
+  color: #aeaeae;
+}
+
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 20.25rem;
+  margin-left: 150px;
+}
+
+.searchBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#searchQueryInput {
+  color: #fff;
+  margin: 10px;
+  width: 90%;
+  height: 2.3rem;
+  background: #2f3541;
+  outline: none;
+  border: none;
+  border-radius: 1.625rem;
+  padding: 0 3.5rem 0 1rem;
+  font-size: 1rem;
+}
+
+#searchQuerySubmit {
+  width: 3.5rem;
+  height: 2.8rem;
+  margin-left: -3.5rem;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+#searchQuerySubmit:hover {
+  cursor: pointer;
+}
+
+.view-overview-box {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  background-color: #232832;
+  border-radius: 8px;
+}
+
+
+.button-discord-theme {
+  margin-right: 20px;
+  padding: 10px 20px;
+  width: fit-content;
+  background-color: #7289da;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px; 
+  font-family: 'Whitney SSm A', 'Whitney SSm B', Arial;
+  font-weight: 400;
+  font-style: normal;
+  cursor: pointer;
+}
+
+.user-farmview-table {
+  color: #ccc;
+  width: 100%;
+}
+
+.user-farmview-table td,
+.user-farmview-table th 
+{ 
+  padding-top: 10px;
+  padding: 10px;
+}
+
+.table-row-odd {
+  background-color: #262a34;
+}
+.table-row-even {
+  background-color: #222730;
+}
+
+
+.txtalign-left {
+  text-align: left;
+}
+.txtalign-right {
+  text-align: right;
+}
+.txtalign-center {
+  text-align: center;
+}
+
+.table-head {
+  background-color: #1c2028;
+  color: #626373;
+}
+
+.link {
+  text-decoration: none;
+  color: #dededf;
+  padding: 2px;
+}

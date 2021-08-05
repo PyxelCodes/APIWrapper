@@ -1,9 +1,0 @@
-{
-    "name": "APIWrapper",
-    "start_url": "/",
-    "icons": [],
-    "theme_color": "#000000",
-    "background_color": "#212121",
-    "display": "fullscreen",
-    "orientation": "portrait"
-}
