@@ -100,7 +100,7 @@ function Overview({ userData, setUserData, history }: any) {
             <div className="row-item" >
                 <OverviewTitle n={1} text={'Overall statistics'} />
                 <div className="view-overview-box" style={{ display: 'grid' }}>
-                    <Databox title="Gold" value={d.gold} />
+                    <Databox title="cum" value={d.gold} />
                     <Databox title="Vault" value={d.vault} />
                     <Databox title="Commands executed" value={d.commandsExecuted} />
                     <Databox title="Joined" value={joinedAtFormatted} />
