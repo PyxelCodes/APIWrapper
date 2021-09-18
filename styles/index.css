@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #161E2D;
+  background-color: #161e2d;
 }
 
 code {
@@ -14,8 +14,8 @@ code {
 }
 
 #header {
-  border-bottom: 2px solid rgba(255,255,255,0.05);
-  background-color: #222C45;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  background-color: #222c45;
   height: 76px;
   display: flex;
   justify-content: space-between;
@@ -35,7 +35,7 @@ code {
   width: 100%;
   display: grid;
   justify-content: center;
-  background-color: #1A2737;
+  background-color: #1a2737;
   position: fixed;
   bottom: 0;
 }
@@ -64,7 +64,7 @@ main {
   height: 69vh;
   padding-top: 76px;
   padding-bottom: 20px;
-  background-color: #161E2D;
+  background-color: #161e2d;
   padding-left: 10%;
   padding-right: 10%;
   color: #dedede;
@@ -141,7 +141,7 @@ main {
   width: 45px;
   height: 45px;
   background-color: #222c45;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: 4px;
