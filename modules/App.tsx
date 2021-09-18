@@ -26,7 +26,7 @@ const App = () => {
   let [error, setError] = useState<any>({})
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/status')
+      .get('https://status.reefraid.com/api/status')
       .then(({ data }) => {
         setStatus(data)
         setLoading(false)
@@ -45,7 +45,7 @@ const App = () => {
       }
 
       axios
-        .get('http://localhost:3000/api/status')
+        .get('https://status.reefraid.com/api/status')
         .then(({ data }) => {
           setStatus(data)
           setLoading(false)
