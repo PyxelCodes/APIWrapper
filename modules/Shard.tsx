@@ -34,17 +34,17 @@ function convertMs(s: number) {
   }
 }
 
-export const Shard = ({ d }: { d: ShardType }) => {
+export const Shard = ({ d, service }: { d: ShardType, service: string }) => {
   return (
     <div>
       <div
         data-tip="true"
-        data-for={`reefraid-shard-${d.id}`}
+        data-for={`${service}-${d.id}`}
         className={`shard bg-${d.status === 0 ? 'success' : d.status === 1 ? 'warning' : 'error'}`}
       >
         {d.id}
       </div>
-      <ReactTooltip id={`reefraid-shard-${d.id}`}>
+      <ReactTooltip id={`${service}-${d.id}`}>
         <h3> Shard {d.id}</h3>
         <p>
           <strong> { d.status === 2 ? d.guilds : '0' } guild(s) unavailable </strong>

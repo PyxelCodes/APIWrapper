@@ -43,7 +43,7 @@ export const ShardMap = ({ status }: { status: Status }) => {
       </h4>
       <div className="shard-grid">
         {status.shards?.map((shard) => {
-          return <Shard d={shard} />
+          return <Shard d={shard} service={status.service} />
         })}
       </div>
     </div>
