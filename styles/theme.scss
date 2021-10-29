@@ -1,0 +1,55 @@
+@media (max-width: 768px) {
+  .display-3 {
+    font-size: 3rem;
+  }
+}
+
+.navbar {
+    border-bottom: 1px solid #fff;
+}
+
+.navbar-brand {
+  color: #fff;
+  font-family: barlow, sans-serif !important;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.navbar-collapse {
+  justify-content: center;
+}
+
+.nav-item {
+  font-family: inter, sans-serif;
+}
+
+.nav-link {
+  transition: all ease-in-out 0.1s;
+  border-radius: 32px;
+}
+
+.btn-rounded {
+  border-width: 1px;
+  border-radius: 50px;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 80px;
+}
+
+.bg-black {
+  background: #000 !important;
+}
+.font-weight-500 {
+  font-weight: 500;
+}
+.navbar.bg-dark {
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+  background: rgba(0, 0, 0, 1) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.75) !important;
+}
+
+.pt4 {
+  padding-top: 1.5rem !important;
+}

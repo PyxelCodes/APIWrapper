@@ -1,0 +1,46 @@
+main {
+  margin-bottom: 10px;
+  height: 69vh;
+  color: #dedede;
+  margin-top: 40px;
+  padding: 76px 10% 20px;
+}
+
+.legend-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.legend {
+  margin-top: 10px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-success {
+  color: #01e6ce;
+}
+.status-warning {
+  color: #ff9b00;
+}
+.status-error {
+  color: #ff414b;
+}
+
+.legend-marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  margin-right: 12px;
+}
+
+.status-success.legend .legend-marker {
+  background-color: #01e6ce;
+}
+.status-warning.legend .legend-marker {
+  background-color: #ff9b00;
+}
+.status-error.legend .legend-marker {
+  background-color: #ff414b;
+}

@@ -1,0 +1,21 @@
+.banner {
+  background-image: url("https://reefraid.com/wp-content/uploads/2021/05/WebsiteBanner.jpg");
+  height: 400px;
+  position: relative;
+  background-color: #fff;
+  background-position: 50%;
+  background-size: cover;
+  width: 100%;
+  border-bottom: 1px solid #5c5c5c;
+}
+
+.rr-logo-big {
+  opacity: 1;
+  animation: fadeTop 1s cubic-bezier(0.77, 0, 0.175, 1);
+  position: absolute;
+  display: flex;
+  margin-top: -320px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

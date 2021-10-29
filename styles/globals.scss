@@ -1,0 +1,28 @@
+@import "~bootstrap/scss/bootstrap";
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('fonts/barlow.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/inter.woff2') format('woff2');
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: inter, sans-serif;
+  background-color: #0E1015;
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
